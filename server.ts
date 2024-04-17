@@ -6,7 +6,10 @@ import { Glob } from "glob";
 import hbs from "handlebars";
 import path from "path";
 
-const __dirname = new URL(".", import.meta.url).pathname;
+const __dirname = String(new URL(".", import.meta.url).pathname).replace(
+  "dist/",
+  "/",
+);
 const pubDir = path.join(__dirname, "public");
 
 const fastify = f({
