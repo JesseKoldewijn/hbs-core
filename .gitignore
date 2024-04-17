@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build output
+dist/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Vercel build output, cache and project config
+.vercel
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
