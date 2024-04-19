@@ -9,9 +9,11 @@ import path from "path";
 const __dirname = String(new URL(".", import.meta.url).pathname);
 const pubDir = path.join(__dirname, "public");
 
+const isDev = process.env.NODE_ENV === "development";
+
 const fastify = f({
   logger: {
-    enabled: true,
+    enabled: isDev,
     level: "warn",
   },
 });
@@ -28,7 +30,7 @@ fastify.register(fastifyView, {
   root: "src",
   includeViewExtension: true,
   defaultContext: {
-    dev: process.env.NODE_ENV === "development", // Inside your templates, `dev` will be `true` if the expression evaluates to true
+    dev: isDev, // Inside your templates, `dev` will be `true` if the expression evaluates to true
   },
   options: {
     partials: {
