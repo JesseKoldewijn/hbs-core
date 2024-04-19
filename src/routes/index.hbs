@@ -1,5 +1,5 @@
 <div
-  class="fixed inset-0 flex h-screen w-full flex-col items-center justify-center gap-2"
+  class="flex min-h-screen w-full flex-col items-center justify-center gap-6 py-8 md:py-12"
 >
   <div class="flex flex-col text-center">
     <h1 class="text-lg font-bold">Home</h1>
@@ -9,4 +9,18 @@
     href="/about"
     class="border-foreground w-max rounded-md border py-1 px-1.5"
   >About</a>
+
+  {{#if items}}
+    <ul class="flex max-w-md flex-col items-center justify-center gap-4">
+      {{#each items as |item|}}
+        <li
+          data-id="{{item.id}}"
+          class="border-foreground/40 mx-auto flex max-w-sm flex-col gap-0.5 rounded-lg border py-2 text-center"
+        >
+          <strong>{{item.name}}</strong>
+          <p class="text-balance">{{item.content}}</p>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </div>
