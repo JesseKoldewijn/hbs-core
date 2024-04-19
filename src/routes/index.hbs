@@ -5,22 +5,59 @@
     <h1 class="text-lg font-bold">Home</h1>
     <p>This is the Home page.</p>
   </div>
+
   <a
     href="/about"
     class="border-foreground w-max rounded-md border py-1 px-1.5"
+    hx-boost="true"
   >About</a>
 
-  {{#if items}}
-    <ul class="flex max-w-md flex-col items-center justify-center gap-4">
-      {{#each items as |item|}}
+  <div class="flex flex-col gap-4">
+    <h2 class="text-center text-lg font-bold">Items (rendered from server
+      context)</h2>
+    {{#if items}}
+      <ul
+        class="flex max-h-56 max-w-md flex-col items-center gap-4 overflow-y-auto px-2"
+      >
+        {{#each items as |item|}}
+          <li
+            data-id="{{item.id}}"
+            class="border-foreground/40 mx-auto flex max-w-sm flex-col gap-0.5 rounded-lg border py-2 text-center"
+          >
+            <strong>{{item.name}}</strong>
+            <p class="text-balance">{{item.content}}</p>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <h2 class="text-center text-lg font-bold">Items (rendered from htmx swap)</h2>
+    <ul
+      class="flex max-h-56 max-w-md flex-col items-center gap-4 overflow-y-auto px-2"
+      hx-get="/api/getItems"
+      hx-trigger="load delay:.5s"
+      hx-swap="innerHTML"
+    >
+      {{#times 10}}
         <li
-          data-id="{{item.id}}"
-          class="border-foreground/40 mx-auto flex max-w-sm flex-col gap-0.5 rounded-lg border py-2 text-center"
+          class="border-foreground/40 mx-0 flex w-full w-sm flex-col gap-4 rounded-lg border py-2 text-center"
         >
-          <strong>{{item.name}}</strong>
-          <p class="text-balance">{{item.content}}</p>
+          <strong
+            data-elemIntent="skeleton"
+            class="bg-foreground/20 mt-1.5 mx-auto block h-4 w-1/2 animate-pulse rounded-md"
+          ></strong>
+          <p class="flex flex-col gap-1 text-balance">
+            <span
+              class="bg-foreground/20 mx-auto block h-4 w-4/6 animate-pulse text-balance rounded-md"
+            ></span>
+            <span
+              class="bg-foreground/20 mx-auto block h-4 w-3/6 animate-pulse text-balance rounded-md"
+            ></span>
+          </p>
         </li>
-      {{/each}}
+      {{/times}}
     </ul>
-  {{/if}}
+  </div>
 </div>

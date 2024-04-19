@@ -1,0 +1,3 @@
+htmx:
+- current: https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js
+- latest: https://unpkg.com/htmx.orglatest

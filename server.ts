@@ -6,6 +6,8 @@ import { Glob } from "glob";
 import hbs from "handlebars";
 import path from "path";
 
+import "~/server/lib/hbs/customHelpers";
+
 const __dirname = String(new URL(".", import.meta.url).pathname);
 const pubDir = path.join(__dirname, "public");
 

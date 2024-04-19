@@ -66,6 +66,11 @@ const cfg: Partial<UserConfig> = {
     //   'fastify-swagger',
     // ],
   },
+  resolve: {
+    alias: {
+      "~/": "/src/",
+    },
+  },
 };
 
 export default defineConfig(cfg);
