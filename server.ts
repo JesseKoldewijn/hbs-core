@@ -42,9 +42,16 @@ fastify.register(fastifyView, {
 });
 
 const routesDirGlob = new Glob("src/routes/**/*.hbs", {});
+const apiRoutesDirGlob = new Glob("src/api/**/*.ts", {});
 
-for await (const path of routesDirGlob) {
-  const route = path.replace("src/routes/", "").replace(".hbs", "");
+const allRoutesMerged = [...routesDirGlob, ...apiRoutesDirGlob];
+
+for await (const path of allRoutesMerged) {
+  const route = path
+    .replace(".hbs", "")
+    .replace(".ts", "")
+    .replace("src/", "")
+    .replace("routes/", "");
 
   const pathName = (path: string) => {
     const p = path.replace("src/routes/", "");
@@ -86,11 +93,94 @@ for await (const path of routesDirGlob) {
 
   const ctx = ctxModule || {};
 
-  fastify.get(pathName(route), (req, reply) => {
-    reply.view(`/routes/${route}`, ctx, {
-      layout: "/layouts/main",
+  if (!route.startsWith("api")) {
+    fastify.get(pathName(route), (req, reply) => {
+      reply.view(`/routes/${route}`, ctx, {
+        layout: "/layouts/main",
+      });
     });
-  });
+  } else {
+    const getApiRoutes = async () => {
+      try {
+        // all api routes are located in the src/api directory and not inside the routes directory
+        const apiRoutes = import.meta.glob("./src/api/**/*.ts", {
+          eager: true,
+        }) as {
+          [key: string]: {
+            default?: any;
+            handler?: any;
+            GET?: any;
+            POST?: any;
+            PUT?: any;
+            DELETE?: any;
+          };
+        };
+
+        const apiRoute = apiRoutes[`./src/api/${route.replace("api/", "")}.ts`];
+
+        const moduleStructuredObj = {
+          default: apiRoute?.default,
+          handler: apiRoute?.handler,
+          GET: apiRoute?.GET,
+          POST: apiRoute?.POST,
+          PUT: apiRoute?.PUT,
+          DELETE: apiRoute?.DELETE,
+        };
+
+        return apiRoute ? moduleStructuredObj : {};
+      } catch (error) {
+        return {};
+      }
+    };
+
+    const apiRoute = (await getApiRoutes()) as {
+      default?: any;
+      handler?: any;
+      GET?: any;
+      POST?: any;
+      PUT?: any;
+      DELETE?: any;
+    };
+
+    const defaultHandler = apiRoute.default || apiRoute.handler || apiRoute.GET;
+
+    if (!!defaultHandler) {
+      fastify.get(pathName(route), async (req, reply) => {
+        defaultHandler(req, reply);
+      });
+    } else {
+      const methods = Object.keys(apiRoute) as Array<
+        "GET" | "POST" | "PUT" | "DELETE"
+      >;
+
+      for (const method of methods) {
+        const handler = apiRoute[method];
+
+        switch (method) {
+          case "GET":
+            fastify.get(pathName(route), async (req, reply) => {
+              handler(req, reply);
+            });
+            break;
+          case "POST":
+            fastify.post(pathName(route), async (req, reply) => {
+              handler(req, reply);
+            });
+            break;
+          case "PUT":
+            fastify.put(pathName(route), async (req, reply) => {
+              handler(req, reply);
+            });
+            break;
+          case "DELETE":
+            fastify.delete(pathName(route), async (req, reply) => {
+              handler(req, reply);
+            });
+            break;
+        }
+      }
+    }
+  }
 }
 
 export const viteNodeApp = fastify;
