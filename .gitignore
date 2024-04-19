@@ -5,6 +5,7 @@ yarn-error.log
 
 # Build output
 dist/
+out/
 
 # Environment variables
 .env

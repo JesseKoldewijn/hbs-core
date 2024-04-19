@@ -553,6 +553,9 @@
 .relative {
   position: relative;
 }
+.static {
+  position: static;
+}
 .inset-0 {
   inset: var(--spacing-0, 0px);
 }
