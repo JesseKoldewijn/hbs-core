@@ -43,18 +43,7 @@ const main = async () => {
       const content = await getContent("http://localhost:3000");
 
       if (!pathName.includes("api") && content) {
-        let newContent = content.html;
-
-        const apiReferences = newContent.match(/\/api\/\w+/g);
-
-        if (apiReferences) {
-          for (const apiReference of apiReferences) {
-            newContent = newContent.replace(
-              apiReference,
-              `${apiReference}.json`,
-            );
-          }
-        }
+        const newContent = content.html;
 
         if (pathName.includes("/")) {
           // create inner directories if not present
@@ -62,18 +51,10 @@ const main = async () => {
             recursive: true,
           });
         }
+        
         const fileName = `${pathName}.html`;
         fs.writeFileSync(`out/${fileName}`, newContent);
-      } else {
-        if (pathName.includes("/")) {
-          // create inner directories if not present
-          fs.mkdirSync(`out/${pathName.replace("index", "")}`, {
-            recursive: true,
-          });
-        }
-        const fileName = `${pathName}.json`;
-        fs.writeFileSync(`out/${fileName}`, String(content.json));
-      }
+      } 
 
       // copy over assets from public into out
       const publicDirGlob = glob.globSync("public/**/*", {
