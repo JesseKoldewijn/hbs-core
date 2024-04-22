@@ -16,14 +16,14 @@ RewriteRule ^(.*)$ /index.html [L]
 
 # BEGIN CACHE CONTROL
 <IfModule mod_headers.c>
-    # WEEK
+    # MONTH
     <FilesMatch "\.(jpg|jpeg|png|gif|swf|webp|avif)$">
-        Header set Cache-Control "max-age=604800, public"
+        Header set Cache-Control "max-age=2592000, public"
     </FilesMatch>
 
     # WEEK
     <FilesMatch "\.(js|css|swf)$">
-        Header set Cache-Control "max-age=604800"
+        Header set Cache-Control "max-age=2592000"
     </FilesMatch>
 </IfModule>
 # END CACHE CONTROL
