@@ -60,7 +60,7 @@ for await (const path of allRoutesMerged) {
     const isRoot = p.includes("index");
 
     if (isRoot) {
-      const relative = p.replace("index", "").replace("/.", ".");
+      const relative = `${p.replace("index", "").split("/.")[0].replace("/.", "")}`;
 
       if (relative === "") return "/";
       if (relative.startsWith("/")) return relative;

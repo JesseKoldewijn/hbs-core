@@ -2,7 +2,7 @@
 <p>
 </p>
 
-> A minimal setup of Fastify, Handlebars and TailwindCSS.
+> A minimal setup of Fastify, Handlebars and TailwindCSS. Current setup can be ran inside of a environment without a build step (required ability to run Typescript) or with a build step (can only be used to serve a static build output).
 
 ## Install
 
