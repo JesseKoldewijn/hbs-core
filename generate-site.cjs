@@ -45,7 +45,6 @@ const main = async () => {
           "/index",
           "",
         );
-        console.log(fetchUrl);
         const pageResponse = await fetch(fetchUrl);
         const pageContent = await pageResponse.text();
 
