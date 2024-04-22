@@ -45,7 +45,7 @@ const main = async () => {
       );
 
       if (!pathName.includes("api") && content) {
-        let newContent = content.html;
+        const newContent = content.html;
 
         if (pathName.includes("/")) {
           // create inner directories if not present
@@ -53,6 +53,7 @@ const main = async () => {
             recursive: true,
           });
         }
+
         const fileName = `${pathName}.html`;
         fs.writeFileSync(`out/${fileName}`, newContent);
       } else {
