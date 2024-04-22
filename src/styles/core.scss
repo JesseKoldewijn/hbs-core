@@ -2,6 +2,7 @@
 @import "tailwindcss/utilities";
 
 @import "./components/index.scss";
+@import "./globals/index.scss";
 
 @theme {
   --color-background: hsla(0, 0%, 0%, 0.97);

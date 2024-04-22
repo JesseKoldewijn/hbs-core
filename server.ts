@@ -7,7 +7,6 @@ import hbs from "handlebars";
 import path from "path";
 
 import "~/server/lib/hbs/customHelpers";
-import "~/libs/core";
 
 const __dirname = String(new URL(".", import.meta.url).pathname);
 const pubDir = path.join(__dirname, "public");
