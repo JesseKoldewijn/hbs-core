@@ -40,21 +40,12 @@ const main = async () => {
         .replace(".ts", "")
         .replace("routes/", "");
 
-      const content = await getContent("http://localhost:3000");
+      const content = await getContent(
+        `http://localhost:3000/${pathName}`.replace("/index", ""),
+      );
 
       if (!pathName.includes("api") && content) {
         let newContent = content.html;
-
-        const apiReferences = newContent.match(/\/api\/\w+/g);
-
-        if (apiReferences) {
-          for (const apiReference of apiReferences) {
-            newContent = newContent.replace(
-              apiReference,
-              `${apiReference}.json`,
-            );
-          }
-        }
 
         if (pathName.includes("/")) {
           // create inner directories if not present
@@ -67,31 +58,41 @@ const main = async () => {
       } else {
         if (pathName.includes("/")) {
           // create inner directories if not present
-          fs.mkdirSync(`out/${pathName.replace("index", "")}`, {
-            recursive: true,
-          });
+          fs.mkdirSync(
+            `out/${pathName.replace("index", "").split("/.")[0].replace("/.", "")}`,
+            {
+              recursive: true,
+            },
+          );
         }
-        const fileName = `${pathName}.json`;
-        fs.writeFileSync(`out/${fileName}`, String(content.json));
-      }
-
-      // copy over assets from public into out
-      const publicDirGlob = glob.globSync("public/**/*", {
-        eager: true,
-      });
-
-      for (const publicDir of publicDirGlob) {
-        const pathName = publicDir.replace("public/", "");
-
-        fs.cpSync(publicDir, `out/${pathName}`, {
-          recursive: true,
-        });
-
-        console.log(`Copied ${publicDir} to out/${pathName}`);
+        const fetchUrl = `http://localhost:3000/${pathName}`.replace(
+          "/index.",
+          ".",
+        );
+        const apiContent = await fetch(fetchUrl);
+        const apiContentData = await apiContent.text();
+        fs.writeFileSync(`out/${pathName}`, String(apiContentData));
       }
     } catch (error) {
       console.error(error);
     }
+  }
+
+  try {
+    // copy over assets from public into out
+    const publicDirGlob = glob.globSync("public/**/*", {
+      eager: true,
+    });
+
+    for (const publicDir of publicDirGlob) {
+      const pathName = publicDir.replace("public/", "");
+
+      fs.cpSync(publicDir, `out/${pathName}`, {
+        recursive: true,
+      });
+    }
+  } catch (err) {
+    console.error(error);
   }
 
   await stopDevServer();
