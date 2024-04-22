@@ -61,7 +61,7 @@ for await (const path of allRoutesMerged) {
 
     if (isRoot) {
       const ext = p.split(".")[1];
-      const relative = `${p.replace("index", "").split("/.")[0].replace("/.", "")}`;
+      const relative = `${p.replace("index", "").split("/.")[0].replace("/.", "")}${ext ? `.${ext}` : ""}`;
 
       if (relative === "") return "/";
       if (relative.startsWith("/")) return relative;
@@ -149,10 +149,10 @@ for await (const path of allRoutesMerged) {
 
     const defaultHandler = apiRoute.default || apiRoute.handler || apiRoute.GET;
 
-    console.log(pathName(route));
+    const routePathName = pathName(route);
 
     if (!!defaultHandler) {
-      fastify.get(pathName(route), async (req, reply) => {
+      fastify.get(routePathName, async (req, reply) => {
         defaultHandler(req, reply);
       });
     } else {
@@ -165,22 +165,22 @@ for await (const path of allRoutesMerged) {
 
         switch (method) {
           case "GET":
-            fastify.get(pathName(route), async (req, reply) => {
+            fastify.get(routePathName, async (req, reply) => {
               handler(req, reply);
             });
             break;
           case "POST":
-            fastify.post(pathName(route), async (req, reply) => {
+            fastify.post(routePathName, async (req, reply) => {
               handler(req, reply);
             });
             break;
           case "PUT":
-            fastify.put(pathName(route), async (req, reply) => {
+            fastify.put(routePathName, async (req, reply) => {
               handler(req, reply);
             });
             break;
           case "DELETE":
-            fastify.delete(pathName(route), async (req, reply) => {
+            fastify.delete(routePathName, async (req, reply) => {
               handler(req, reply);
             });
             break;

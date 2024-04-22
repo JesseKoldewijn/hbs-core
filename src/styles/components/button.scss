@@ -1,0 +1,40 @@
+.button {
+  --button-size: 50px;
+  --button-foreground: var(--color-background);
+  --button-background: var(--color-foreground);
+  --button-border-width: 2px;
+  --button-border: var(--button-border-width) solid var(--button-background);
+  --button-border-hover: var(--button-border-width) solid
+    var(--button-foreground);
+  --button-border-radius: 5px;
+
+  border: var(--button-border);
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-background);
+  color: var(--button-foreground);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__text {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  &__icon {
+    height: calc(var(--button-size) * 0.75);
+    width: calc(var(--button-size) * 0.75);
+  }
+
+  &:hover {
+    background: var(--button-background);
+    color: var(--button-foreground);
+    border: var(--button-border-hover);
+  }
+
+  &--link {
+    text-decoration: none;
+    border: none;
+  }
+}

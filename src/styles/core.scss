@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tailwindcss/utilities";
 
+@import "./components/index.scss";
+
 @theme {
   --color-background: hsla(0, 0%, 0%, 0.97);
   --color-background-faded: hsla(0, 0%, 0%, 0.25);
