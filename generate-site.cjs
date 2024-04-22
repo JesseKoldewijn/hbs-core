@@ -3,6 +3,11 @@ const getHTML = require("html-get");
 const child_process = require("child_process");
 const glob = require("glob");
 const fs = require("fs");
+const htmlMinifier = require("@minify-html/node");
+
+const config = require("./jereko-hbs.config.cjs");
+
+const outputDir = config?.distDir ?? "out";
 
 // Spawn Chromium process once
 const browserlessFactory = createBrowserless();
@@ -27,7 +32,7 @@ const main = async () => {
   const allRoutesMerged = [...routesDirGlob, ...apiRoutesDirGlob];
 
   // create output directory if not present
-  fs.mkdirSync("out", { recursive: true });
+  fs.mkdirSync(outputDir, { recursive: true });
 
   // generate static site
 
@@ -47,15 +52,21 @@ const main = async () => {
       if (!pathName.includes("api") && content) {
         const newContent = content.html;
 
+        const minified = htmlMinifier.minify(Buffer.from(newContent), {
+          keep_closing_tags: true,
+          keep_spaces_between_attributes: true,
+          preserve_brace_template_syntax: true,
+        });
+
         if (pathName.includes("/")) {
           // create inner directories if not present
-          fs.mkdirSync(`out/${pathName.replace("index", "")}`, {
+          fs.mkdirSync(`${outputDir}/${pathName.replace("index", "")}`, {
             recursive: true,
           });
         }
 
         const fileName = `${pathName}.html`;
-        fs.writeFileSync(`out/${fileName}`, newContent);
+        fs.writeFileSync(`${outputDir}/${fileName}`, minified);
       } else {
         if (pathName.includes("/")) {
           // create inner directories if not present
@@ -72,7 +83,7 @@ const main = async () => {
         );
         const apiContent = await fetch(fetchUrl);
         const apiContentData = await apiContent.text();
-        fs.writeFileSync(`out/${pathName}`, String(apiContentData));
+        fs.writeFileSync(`${outputDir}/${pathName}`, String(apiContentData));
       }
     } catch (error) {
       console.error(error);
@@ -88,7 +99,7 @@ const main = async () => {
     for (const publicDir of publicDirGlob) {
       const pathName = publicDir.replace("public/", "");
 
-      fs.cpSync(publicDir, `out/${pathName}`, {
+      fs.cpSync(publicDir, `${outputDir}/${pathName}`, {
         recursive: true,
       });
     }
