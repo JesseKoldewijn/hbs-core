@@ -1,5 +1,9 @@
 RewriteEngine On
 
+# Remove trailing slash from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [L,R=301]
+
 # Redirect requests for /dir.ext to /dir/index.ext
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -9,6 +13,20 @@ RewriteRule ^(.*)\.([^/]+)$ /$1/index.$2 [L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /index.html [L]
+
+# BEGIN CACHE CONTROL
+<IfModule mod_headers.c>
+    # WEEK
+    <FilesMatch "\.(jpg|jpeg|png|gif|swf|webp|avif)$">
+        Header set Cache-Control "max-age=604800, public"
+    </FilesMatch>
+
+    # WEEK
+    <FilesMatch "\.(js|css|swf)$">
+        Header set Cache-Control "max-age=604800"
+    </FilesMatch>
+</IfModule>
+# END CACHE CONTROL
 
 # BEGIN GZIP
 <ifmodule mod_deflate.c>
