@@ -1,5 +1,3 @@
-const getHTML = require("html-get");
-const child_process = require("child_process");
 const glob = require("glob");
 const fs = require("fs");
 const htmlMinifier = require("@minify-html/node");
@@ -9,9 +7,6 @@ const config = require("./jereko-hbs.config.cjs");
 const outputDir = config?.distDir ?? "out";
 
 const main = async () => {
-  // Start the dev server
-  await startDevServer();
-
   // Kill the process when Node.js exit
   process.on("exit", () => {
     console.log("closing resources!");
@@ -72,10 +67,10 @@ const main = async () => {
             },
           );
         }
-        const fetchUrl = `http://localhost:3000/${pathName}`.replace(
-          "/index.",
-          ".",
-        );
+        const fetchUrl = `http://localhost:3000/${pathName}`
+          .replace("/index.", ".")
+          .split(".")[0];
+
         const apiContent = await fetch(fetchUrl);
         const apiContentData = await apiContent.text();
         fs.writeFileSync(`${outputDir}/${pathName}`, String(apiContentData));
@@ -101,37 +96,5 @@ const main = async () => {
   } catch (err) {
     console.error(error);
   }
-
-  await stopDevServer();
 };
 main();
-
-async function startDevServer() {
-  await child_process.exec("pnpm run dev", (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-  });
-}
-
-function stopDevServer() {
-  child_process.exec(
-    "lsof -i :3000 | grep LISTEN | awk '{print $2}'",
-    (error, stdout, stderr) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        return process.exit();
-      }
-
-      child_process.exec(`kill ${stdout}`, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`exec error: ${error}`);
-          return process.exit();
-        }
-        return process.exit();
-      });
-      return process.exit();
-    },
-  );
-}

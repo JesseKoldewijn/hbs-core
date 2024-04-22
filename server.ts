@@ -60,6 +60,7 @@ for await (const path of allRoutesMerged) {
     const isRoot = p.includes("index");
 
     if (isRoot) {
+      const ext = p.split(".")[1];
       const relative = `${p.replace("index", "").split("/.")[0].replace("/.", "")}`;
 
       if (relative === "") return "/";
@@ -118,7 +119,9 @@ for await (const path of allRoutesMerged) {
           };
         };
 
-        const apiRoute = apiRoutes[`./src/api/${route.replace("api/", "")}.ts`];
+        const routePath = route.replace("api/", "");
+
+        const apiRoute = apiRoutes[`./src/api/${routePath}.ts`];
 
         const moduleStructuredObj = {
           default: apiRoute?.default,
@@ -145,6 +148,8 @@ for await (const path of allRoutesMerged) {
     };
 
     const defaultHandler = apiRoute.default || apiRoute.handler || apiRoute.GET;
+
+    console.log(pathName(route));
 
     if (!!defaultHandler) {
       fastify.get(pathName(route), async (req, reply) => {

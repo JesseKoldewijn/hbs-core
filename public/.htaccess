@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Redirect requests for /dir.ext to /dir/index.ext
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.([^/]+)$ /$1/index.$2 [L]
+
+# Allow access to existing files and directories
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.html [L]
