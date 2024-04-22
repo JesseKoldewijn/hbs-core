@@ -7,6 +7,7 @@ import hbs from "handlebars";
 import path from "path";
 
 import "~/server/lib/hbs/customHelpers";
+import "~/libs/core";
 
 const __dirname = String(new URL(".", import.meta.url).pathname);
 const pubDir = path.join(__dirname, "public");
@@ -152,40 +153,64 @@ for await (const path of allRoutesMerged) {
     const routePathName = pathName(route);
 
     if (!!defaultHandler) {
+      const includesExt = routePathName.includes(".");
+      if (includesExt) {
+        const ext = routePathName.split(".")[1];
+        const relative = `${routePathName.replace(`.${ext}`, "")}`;
+
+        fastify.get(relative, async (req, reply) => {
+          defaultHandler(req, reply);
+        });
+      }
       fastify.get(routePathName, async (req, reply) => {
         defaultHandler(req, reply);
       });
     } else {
+      const includesExt = routePathName.includes(".");
+
       const methods = Object.keys(apiRoute) as Array<
         "GET" | "POST" | "PUT" | "DELETE"
       >;
 
-      for (const method of methods) {
-        const handler = apiRoute[method];
+      const setMethod = (
+        route: string,
+        methods: Array<"GET" | "POST" | "PUT" | "DELETE">,
+      ) => {
+        for (const method of methods) {
+          const handler = apiRoute[method];
 
-        switch (method) {
-          case "GET":
-            fastify.get(routePathName, async (req, reply) => {
-              handler(req, reply);
-            });
-            break;
-          case "POST":
-            fastify.post(routePathName, async (req, reply) => {
-              handler(req, reply);
-            });
-            break;
-          case "PUT":
-            fastify.put(routePathName, async (req, reply) => {
-              handler(req, reply);
-            });
-            break;
-          case "DELETE":
-            fastify.delete(routePathName, async (req, reply) => {
-              handler(req, reply);
-            });
-            break;
+          switch (method) {
+            case "GET":
+              fastify.get(route, async (req, reply) => {
+                handler(req, reply);
+              });
+              break;
+            case "POST":
+              fastify.post(route, async (req, reply) => {
+                handler(req, reply);
+              });
+              break;
+            case "PUT":
+              fastify.put(route, async (req, reply) => {
+                handler(req, reply);
+              });
+              break;
+            case "DELETE":
+              fastify.delete(route, async (req, reply) => {
+                handler(req, reply);
+              });
+              break;
+          }
         }
+      };
+
+      if (includesExt) {
+        const ext = routePathName.split(".")[1];
+        const relative = `${routePathName.replace(`.${ext}`, "")}`;
+
+        setMethod(relative, methods);
       }
+      setMethod(routePathName, methods);
     }
   }
 }
