@@ -1,4 +1,3 @@
-const createBrowserless = require("browserless");
 const getHTML = require("html-get");
 const child_process = require("child_process");
 const glob = require("glob");
@@ -9,9 +8,6 @@ const config = require("./jereko-hbs.config.cjs");
 
 const outputDir = config?.distDir ?? "out";
 
-// Spawn Chromium process once
-const browserlessFactory = createBrowserless();
-
 const main = async () => {
   // Start the dev server
   await startDevServer();
@@ -19,7 +15,6 @@ const main = async () => {
   // Kill the process when Node.js exit
   process.on("exit", () => {
     console.log("closing resources!");
-    browserlessFactory.close();
   });
 
   const routesDirGlob = glob.globSync("src/routes/**/*.hbs", {
@@ -45,14 +40,16 @@ const main = async () => {
         .replace(".ts", "")
         .replace("routes/", "");
 
-      const content = await getContent(
-        `http://localhost:3000/${pathName}`.replace("/index", ""),
-      );
+      if (!pathName.includes("api")) {
+        const fetchUrl = `http://localhost:3000/${pathName}`.replace(
+          "/index",
+          "",
+        );
+        console.log(fetchUrl);
+        const pageResponse = await fetch(fetchUrl);
+        const pageContent = await pageResponse.text();
 
-      if (!pathName.includes("api") && content) {
-        const newContent = content.html;
-
-        const minified = htmlMinifier.minify(Buffer.from(newContent), {
+        const minified = htmlMinifier.minify(Buffer.from(pageContent), {
           keep_closing_tags: true,
           keep_spaces_between_attributes: true,
           preserve_brace_template_syntax: true,
@@ -139,14 +136,4 @@ function stopDevServer() {
       return process.exit();
     },
   );
-}
-
-async function getContent(url) {
-  // create a browser context inside Chromium process
-  const browserContext = browserlessFactory.createContext();
-  const getBrowserless = () => browserContext;
-  const result = await getHTML(url, { getBrowserless });
-  // close the browser context after it's used
-  await getBrowserless((browser) => browser.destroyContext());
-  return result;
 }
