@@ -67,9 +67,10 @@ const main = async () => {
             },
           );
         }
-        const fetchUrl = `http://localhost:3000/${pathName}`
-          .replace("/index.", ".")
-          .split(".")[0];
+        const fetchUrl = `http://localhost:3000/${pathName}`.replace(
+          "/index.",
+          ".",
+        );
 
         const apiContent = await fetch(fetchUrl);
         const apiContentData = await apiContent.text();
