@@ -30,7 +30,6 @@ const main = async () => {
   fs.mkdirSync(outputDir, { recursive: true });
 
   // generate static site
-
   for (const route of allRoutesMerged) {
     try {
       /** @type {string} */
@@ -108,7 +107,7 @@ const main = async () => {
 main();
 
 async function startDevServer() {
-  child_process.exec("pnpm run dev", (error, stdout, stderr) => {
+  await child_process.exec("pnpm run dev", (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;
