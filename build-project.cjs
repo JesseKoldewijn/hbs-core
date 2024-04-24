@@ -14,6 +14,16 @@ const buildProject = async () => {
     }
   });
 
+  const jsCompile = spawn("pnpm", ["run", "compile:js:core"], {
+    stdio: "inherit",
+  });
+
+  jsCompile.on("exit", (code) => {
+    if (code === 0 || code === null) {
+      jsCompile.kill();
+    }
+  });
+
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   /**
