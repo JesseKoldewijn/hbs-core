@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src/client",
+
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+
+    "outDir": "public",
+    "types": ["node", "vite/client"],
+
+    // Paths alias
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths"
+      }
+    ]
+  },
+  "include": ["./src/client/core/**/*.*", "./src/client/libs/**/*.*"]
+}

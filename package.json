@@ -2,12 +2,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "dotenv -- concurrently \"vite\" \"pnpm run compile:css:watch\"",
+    "dev": "dotenv -- concurrently \"vite\" \"pnpm run compile:css:watch\" \"pnpm run compile:js:watch\"",
     "build": "node ./build-project.cjs",
     "start": "dotenv -- serve ./out",
     "compile:site": "dotenv -- node ./generate-site.cjs",
+    "compile:js:core": "tsc --project tsconfig.client.json",
+    "compile:js:watch": "watch -d -p='/node_modules dist/i public/i' 'pnpm run compile:js:core' ./src",
     "compile:css": "postcss ./src/styles/core.scss -o ./public/styles/core.css",
-    "compile:css:watch": "watch -d -p='/node_modules dist/i' 'pnpm run compile:css' ./",
+    "compile:css:watch": "watch -d -p='/node_modules dist/i public/i' 'pnpm run compile:css' ./src",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -28,6 +30,7 @@
     "@tailwindcss/postcss": "4.0.0-alpha.14",
     "@types/node": "^20.12.7",
     "@types/watch": "^1.0.6",
+    "@zerollup/ts-transform-paths": "^1.7.18",
     "concurrently": "^8.2.2",
     "copyfiles": "^2.4.1",
     "cssnano": "^6.1.2",

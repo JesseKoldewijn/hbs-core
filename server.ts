@@ -5,6 +5,7 @@ import f from "fastify";
 import { Glob } from "glob";
 import hbs from "handlebars";
 import path from "path";
+import { partials } from "~/config/hbs/partials";
 
 import "~/server/lib/hbs/customHelpers";
 
@@ -35,11 +36,7 @@ fastify.register(fastifyView, {
     dev: isDev, // Inside your templates, `dev` will be `true` if the expression evaluates to true
   },
   options: {
-    partials: {
-      head: "/partials/head.hbs",
-      header: "/partials/header.hbs",
-      footer: "/partials/footer.hbs",
-    },
+    partials,
   },
 });
 
