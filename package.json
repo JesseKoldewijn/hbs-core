@@ -15,7 +15,7 @@
     "@fastify/view": "^9.0.0",
     "@fastify/vite": "^6.0.6",
     "@minify-html/node": "^0.15.0",
-    "@t3-oss/env-core": "^0.9.2",
+    "@t3-oss/env-core": "^0.10.1",
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "handlebars": "^4.7.8",
