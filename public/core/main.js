@@ -1,7 +1,6 @@
-import { coreLoaders } from "./loaders/coreLoaders.js";
+import "./loaders/coreLoaders.js";
 import "./viewTransition.js";
 const main = async () => {
-    // Load htmx
-    await coreLoaders();
+    // you can do something here ;)
 };
 main();

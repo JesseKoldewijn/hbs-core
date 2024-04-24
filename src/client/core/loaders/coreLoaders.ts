@@ -1,6 +1,2 @@
-import { htmxLoader } from "./htmxLoader.js";
+import "./htmxLoader.js";
 import "./jqueryLoader.js";
-
-export const coreLoaders = async () => {
-  htmxLoader();
-};

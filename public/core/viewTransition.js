@@ -5,7 +5,7 @@ function spaNavigate(href, e) {
         return;
     }
     // With a transition:
-    document.startViewTransition(() => {
+    document.startViewTransition(async () => {
         // check if e has the key of "htmx-internal-data"
         const IsHxBoost = !!e["htmx-internal-data"];
         if (IsHxBoost) {
@@ -14,8 +14,29 @@ function spaNavigate(href, e) {
         else {
             const isInternalLink = href.startsWith(window.location.origin) || href.startsWith("/");
             if (isInternalLink) {
-                const elemRef = e.target;
-                console.warn("Internal link clicked, but not handled by htmx. Please add `hx-boost` to the anchor tag", elemRef);
+                // get content of next page and replace the current page
+                const nextPageRes = await fetch(href);
+                const nextPageHtml = await nextPageRes.text();
+                const nextPageBody = new DOMParser().parseFromString(nextPageHtml, "text/html");
+                const nextPageTitle = nextPageBody.querySelector("title")?.innerText;
+                const nextPageDescription = nextPageBody
+                    .querySelector('meta[name="description"]')
+                    ?.getAttribute("content");
+                const nextPageContent = nextPageBody.querySelector("body");
+                document.title = nextPageTitle || "";
+                document
+                    .querySelector('meta[name="description"]')
+                    ?.setAttribute("content", nextPageDescription || "");
+                document.body.innerHTML = nextPageContent?.innerHTML || "";
+                // reTrigger the script tags
+                const scripts = document.querySelectorAll("script");
+                scripts.forEach((script) => {
+                    const newScript = document.createElement("script");
+                    newScript.text = script.text;
+                    script.replaceWith(newScript);
+                });
+                // @ts-expect-error
+                htmx.process(document.body);
             }
             else {
                 window.location.assign(href);
