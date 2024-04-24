@@ -5,6 +5,7 @@ const htmlMinifier = require("@minify-html/node");
 const config = require("./jereko-hbs.config.cjs");
 
 const outputDir = config?.distDir ?? "out";
+const serverPort = config?.port ?? 3000;
 
 const main = async () => {
   // Kill the process when Node.js exit
@@ -35,7 +36,7 @@ const main = async () => {
         .replace("routes/", "");
 
       if (!pathName.includes("api")) {
-        const fetchUrl = `http://localhost:3000/${pathName}`.replace(
+        const fetchUrl = `http://localhost:${serverPort}/${pathName}`.replace(
           "/index",
           "",
         );
@@ -67,7 +68,7 @@ const main = async () => {
             },
           );
         }
-        const fetchUrl = `http://localhost:3000/${pathName}`.replace(
+        const fetchUrl = `http://localhost:${serverPort}/${pathName}`.replace(
           "/index.",
           ".",
         );

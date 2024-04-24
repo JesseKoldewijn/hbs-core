@@ -1,0 +1,11 @@
+documentation:
+  - readme.md
+  - CONTRIBUTING.md
+  - CODE_OF_CONDUCT.md
+  - SECURITY.md
+dependencies:
+  - package.json
+  - pnpm-lock.yaml
+ci:
+  - .github/workflows/*
+  - scripts/*

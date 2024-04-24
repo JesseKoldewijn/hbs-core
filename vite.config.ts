@@ -1,10 +1,15 @@
 import { UserConfig, defineConfig } from "vite";
 import { VitePluginNode } from "vite-plugin-node";
 
+// @ts-expect-error
+import config from "./jereko-hbs.config.cjs";
+
+const serverPort = config.server.port || 3000;
+
 const cfg: Partial<UserConfig> = {
   server: {
     // vite server configs, for details see [vite doc](https://vitejs.dev/config/#server-host)
-    port: 3000,
+    port: serverPort,
   },
   assetsInclude: "src/**/*.hbs",
   build: {
