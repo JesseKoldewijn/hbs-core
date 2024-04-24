@@ -19,7 +19,7 @@
   padding: 0.25rem 1rem;
 
   &__text {
-    font-size: 1.1rem;
+    font-size: calc(var(--button-size) * 0.35);
     font-weight: 700;
   }
 
@@ -38,4 +38,8 @@
     text-decoration: none;
     border: none;
   }
+}
+
+.button--small {
+  --button-size: 40px;
 }
