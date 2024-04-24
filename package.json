@@ -3,8 +3,9 @@
   "type": "module",
   "scripts": {
     "dev": "dotenv -- concurrently \"vite\" \"pnpm run compile:css:watch\"",
-    "build": "dotenv -- node ./build-project.cjs",
+    "build": "node ./build-project.cjs",
     "start": "dotenv -- serve ./out",
+    "compile:site": "dotenv -- node ./generate-site.cjs",
     "compile:css": "postcss ./src/styles/core.scss -o ./public/styles/core.css",
     "compile:css:watch": "watch -d -p='/node_modules dist/i' 'pnpm run compile:css' ./",
     "format": "prettier --write ."

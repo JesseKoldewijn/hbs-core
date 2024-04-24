@@ -1,8 +1,17 @@
 const { spawn } = require("child_process");
 
+// setup env vars using dotenv
+require("dotenv").config();
+
 const buildProject = async () => {
   const cssCompile = spawn("pnpm", ["run", "compile:css"], {
     stdio: "inherit",
+  });
+
+  cssCompile.on("exit", (code) => {
+    if (code === 0 || code === null) {
+      cssCompile.kill();
+    }
   });
 
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -17,7 +26,7 @@ const buildProject = async () => {
 
   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  const build = spawn("pnpm", ["run", "build"], {
+  const build = spawn("pnpm", ["run", "compile:site"], {
     stdio: "inherit",
   });
 
