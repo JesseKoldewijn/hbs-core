@@ -1,4 +1,4 @@
-const itemLength = 100;
+const itemLength = 10;
 
 const getItem = (id: number) => {
   return {
