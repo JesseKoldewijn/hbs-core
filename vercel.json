@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "out",
+  "rewrites": [
+    {
+      "source": "/(.+)/$",
+      "destination": "/$1",
+      "statusCode": 308
+    },
+    {
+      "source": "/(.*)\\.([^/]+)$",
+      "destination": "/$1/index.$2",
+      "statusCode": 200
+    },
+    {
+      "source": "/\\.well-known/(.*)",
+      "destination": "/.well-known/$1"
+    }
+  ]
+}
