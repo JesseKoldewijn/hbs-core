@@ -10,7 +10,7 @@
 
     "outDir": "dist",
 
-    "types": ["node", "vite/client"],
+    "types": ["node", "vite/client", "jquery"],
 
     // Paths alias
     "baseUrl": ".",
