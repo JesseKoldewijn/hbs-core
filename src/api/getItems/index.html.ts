@@ -7,7 +7,7 @@ const handler = (req: FastifyRequest, reply: FastifyReply) => {
     return `
       <li
         data-id="${item.id}"
-        class="border-foreground/40 mx-auto flex max-w-sm flex-col gap-0.5 rounded-lg border py-2 text-center"
+        class="border-foreground/40 mx-auto flex max-w-sm flex-col gap-0.5 rounded-lg border py-2 px-1 text-center"
       >
         <strong>${item.name}</strong>
         <p class="text-balance">${item.content}</p>
