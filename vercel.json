@@ -20,7 +20,7 @@
   ],
   "headers": [
     {
-      "source": "/\\.woff2$|\\.woff$|\\.ttf$|\\.html$|\\.js$|\\.css$/",
+      "source": "/\\.woff2$|\\.woff$|\\.ttf$|\\.html$|\\.js$|\\.css$|\\/.+\\.(woff2|woff|ttf|html|js|css)$/",
       "headers": [
         {
           "key": "Cache-Control",
