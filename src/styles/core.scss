@@ -4,16 +4,28 @@
 @import "./components/index.scss";
 @import "./globals/index.scss";
 
+@font-face {
+  font-family: "Geist";
+  display: swap;
+  src:
+    url("/fonts/GeistVF.woff2") format("woff2"),
+    url("/fonts/GeistVF.woff") format("woff"),
+    url("/fonts/Geist-Regular.ttf") format("truetype");
+}
+
 @theme {
   --color-background: hsla(0, 0%, 0%, 0.97);
   --color-background-faded: hsla(0, 0%, 0%, 0.25);
   --color-foreground: hsla(0, 0%, 100%, 0.97);
   --color-foreground-faded: hsla(0, 0%, 100%, 0.25);
+  --font-family-sans: "Geist", "Inter", "Roboto", sans-serif;
 }
 
 :root {
   background-color: var(--color-background);
   color: var(--color-foreground);
+
+  font-family: var(--font-family-sans);
 
   /* width */
   ::-webkit-scrollbar {
