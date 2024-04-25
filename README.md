@@ -16,6 +16,13 @@ pnpm install
 pnpm run dev
 ```
 
+## Build and serve
+
+```sh
+pnpm run build
+pnpm run serve
+```
+
 ## Author
 
 👤 **Jesse Koldewijn**
