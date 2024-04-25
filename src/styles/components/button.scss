@@ -49,4 +49,8 @@
     --button-foreground: var(--color-foreground);
     --button-background: var(--color-background);
   }
+
+  &--active {
+    filter: invert(1);
+  }
 }

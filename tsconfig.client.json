@@ -13,7 +13,7 @@
     "skipLibCheck": true,
 
     "outDir": "public",
-    "types": ["node", "vite/client"],
+    "types": ["node", "vite/client", "jquery"],
 
     // Paths alias
     "baseUrl": ".",

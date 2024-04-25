@@ -1,5 +1,8 @@
 import "./viewTransition.js";
 const main = async () => {
-    // you can do something here ;)
+    if ($ !== undefined) {
+        const appCore = await import("./application-core.js");
+        appCore.default();
+    }
 };
 main();
