@@ -17,5 +17,16 @@
       "source": "/\\.well-known/(.*)",
       "destination": "/.well-known/$1"
     }
+  ],
+  "headers": [
+    {
+      "source": "/\\.woff2$|\\.woff$|\\.ttf$|\\.html$|\\.js$|\\.css$/",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=604800, stale-while-revalidate=59, immutable"
+        }
+      ]
+    }
   ]
 }
