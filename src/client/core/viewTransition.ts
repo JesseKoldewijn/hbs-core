@@ -24,35 +24,14 @@ function spaNavigate(href: string, e: Event) {
         href.startsWith(window.location.origin) || href.startsWith("/");
 
       if (isInternalLink) {
-        // get content of next page and replace the current page
-        const nextPageRes = await fetch(href);
-        const nextPageHtml = await nextPageRes.text();
-        const nextPageBody = new DOMParser().parseFromString(
-          nextPageHtml,
-          "text/html",
+        // check if either target or current target has the href attribute
+
+        console.warn(
+          "Internal link detected, but missing hx-boost. Please add hx-boost to the anchor tag.",
+          e,
         );
-        const nextPageTitle = nextPageBody.querySelector("title")?.innerText;
-        const nextPageDescription = nextPageBody
-          .querySelector('meta[name="description"]')
-          ?.getAttribute("content");
-        const nextPageContent = nextPageBody.querySelector("body");
 
-        document.title = nextPageTitle || "";
-        document
-          .querySelector('meta[name="description"]')
-          ?.setAttribute("content", nextPageDescription || "");
-        document.body.innerHTML = nextPageContent?.innerHTML || "";
-
-        // reTrigger the script tags
-        const scripts = document.querySelectorAll("script");
-        scripts.forEach((script) => {
-          const newScript = document.createElement("script");
-          newScript.text = script.text;
-          script.replaceWith(newScript);
-        });
-
-        // @ts-expect-error
-        htmx.process(document.body);
+        alert("A internal problem has occurred. Please try again later.");
       } else {
         window.location.assign(href);
       }

@@ -19,13 +19,13 @@
   padding: 0.25rem 1rem;
 
   &__text {
-    font-size: calc(var(--button-size) * 0.35);
+    font-size: calc(var(--button-size, 1) * 0.35);
     font-weight: 700;
   }
 
   &__icon {
-    height: calc(var(--button-size) * 0.75);
-    width: calc(var(--button-size) * 0.75);
+    height: calc(var(--button-size, 0) * 0.75);
+    width: calc(var(--button-size, 0) * 0.75);
   }
 
   &:hover {
@@ -38,8 +38,15 @@
     text-decoration: none;
     border: none;
   }
-}
 
-.button--small {
-  --button-size: 40px;
+  &--small {
+    --button-size: 40px;
+  }
+
+  &--invert {
+    --button-border: none;
+    --button-border-hover: none;
+    --button-foreground: var(--color-foreground);
+    --button-background: var(--color-background);
+  }
 }
