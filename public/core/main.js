@@ -1,8 +1,1 @@
-import "./viewTransition.js";
-const main = async () => {
-    if ($ !== undefined) {
-        const appCore = await import("./application-core.js");
-        appCore.default();
-    }
-};
-main();
+function e(t,n){document.startViewTransition&&document.startViewTransition(async()=>{!!n["htmx-internal-data"]?n.preventDefault():t.startsWith(window.location.origin)||t.startsWith("/")?(console.warn("Internal link detected, but missing hx-boost. Please add hx-boost to the anchor tag.",n),alert("A internal problem has occurred. Please try again later.")):window.location.assign(t)})}document.addEventListener("click",function(t){if(!t)return;let n=t.target?.tagName==="A"||t.currentTarget?.tagName==="A"||t.target?.parentElement?.tagName==="A",a=t.target?.href||t.currentTarget?.href||t.target?.parentElement?.href;n&&(t.preventDefault(),e(a,t))});var r=async()=>{$!==void 0&&(await import("./application-core-2XKMOHXN.js")).default()};r();

@@ -73,6 +73,9 @@ devDependencies:
   dotenv-cli:
     specifier: ^7.4.1
     version: 7.4.1
+  esbuild:
+    specifier: ^0.20.2
+    version: 0.20.2
   glob:
     specifier: ^10.3.12
     version: 10.3.12
