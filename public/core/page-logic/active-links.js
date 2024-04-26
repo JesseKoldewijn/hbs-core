@@ -32,7 +32,6 @@ const activeLinks = async () => {
                     return;
                 }
                 lastRanPathname = window.location.pathname;
-                console.log("ctx", ctx.location, window.location.pathname);
                 setActiveLink();
             });
             observer.observe(document.body, {
