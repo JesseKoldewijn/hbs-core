@@ -1,11 +1,13 @@
-const esbuild = require("esbuild");
+import fs from "fs";
+
+import esbuild from "esbuild";
 
 const compileJs = async () => {
   const outputPath = "public/core";
 
+  const __dirname = new URL(".", import.meta.url).pathname;
   const outputAbsolutePath = `${__dirname}/${outputPath}`;
 
-  const fs = require("fs");
   if (!fs.existsSync(outputAbsolutePath)) {
     fs.mkdirSync(outputAbsolutePath, { recursive: true });
   }
@@ -34,3 +36,5 @@ const compileJs = async () => {
   await esbuild.build(cfg);
 };
 compileJs();
+
+export default compileJs;

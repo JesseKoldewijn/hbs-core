@@ -6,7 +6,7 @@
     "build": "node ./build-project.cjs",
     "start": "dotenv -- serve ./out",
     "compile:site": "dotenv -- node ./generate-site.cjs",
-    "compile:js:core": "node ./compile-js.cjs",
+    "compile:js:core": "node ./compile-assets.js",
     "compile:js:watch": "watch -d -p='/node_modules out/i public/i' 'pnpm run compile:js:core' ./src",
     "compile:css": "postcss ./src/styles/core.scss -o ./public/styles/core.css",
     "compile:css:watch": "watch -d -p='/node_modules out/i public/i' 'pnpm run compile:css' ./src",
