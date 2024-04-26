@@ -6,8 +6,7 @@
     "build": "node ./build-project.cjs",
     "start": "dotenv -- serve ./out",
     "compile:site": "dotenv -- node ./generate-site.cjs",
-    "compile:js:core": "node ./compile-js.cjs && node ./minify-core.mjs",
-    "compile:js:core:prod": "tsc --project tsconfig.client.json && node ./minify-core.mjs --build",
+    "compile:js:core": "node ./compile-js.cjs",
     "compile:js:watch": "watch -d -p='/node_modules out/i public/i' 'pnpm run compile:js:core' ./src",
     "compile:css": "postcss ./src/styles/core.scss -o ./public/styles/core.css",
     "compile:css:watch": "watch -d -p='/node_modules out/i public/i' 'pnpm run compile:css' ./src",
@@ -23,6 +22,8 @@
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "handlebars": "^4.7.8",
+    "htmx.org": "^1.9.12",
+    "jquery": "4.0.0-beta",
     "watch": "^1.0.2",
     "zod": "^3.23.4"
   },

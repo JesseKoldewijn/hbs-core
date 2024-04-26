@@ -32,6 +32,12 @@ dependencies:
   handlebars:
     specifier: ^4.7.8
     version: 4.7.8
+  htmx.org:
+    specifier: ^1.9.12
+    version: 1.9.12
+  jquery:
+    specifier: 4.0.0-beta
+    version: 4.0.0-beta
   watch:
     specifier: ^1.0.2
     version: 1.0.2
@@ -2737,6 +2743,10 @@ packages:
       terser: 5.30.4
     dev: true
 
+  /htmx.org@1.9.12:
+    resolution: {integrity: sha512-VZAohXyF7xPGS52IM8d1T1283y+X4D+Owf3qY1NZ9RuBypyu9l8cGsxUMAG5fEAb/DhT7rDoJ9Hpu5/HxFD3cw==}
+    dev: false
+
   /http-errors@1.4.0:
     resolution: {integrity: sha512-oLjPqve1tuOl5aRhv8GK5eHpqP1C9fb+Ol+XTLjKfLltE44zdDbEdjPSbU7Ch5rSNsVFqZn97SrMmZLdu1/YMw==}
     engines: {node: '>= 0.6'}
@@ -2903,6 +2913,10 @@ packages:
   /jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
     dev: true
+
+  /jquery@4.0.0-beta:
+    resolution: {integrity: sha512-F/LxAJ1KuoIfS5j6T5R57YceLJfXjwBl5hJ9za2itWyCy24YqU5R/DzRf76RrpeHfpJgQyqwnPbUQbjSfoEBcQ==}
+    dev: false
 
   /json-schema-ref-resolver@1.0.1:
     resolution: {integrity: sha512-EJAj1pgHc1hxF6vo2Z3s69fMjO1INq6eGHXZ8Z6wCQeldCuwxGK9Sxf4/cScGn3FZubCVUehfWtcDM/PLteCQw==}

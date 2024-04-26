@@ -14,7 +14,7 @@ const buildProject = async () => {
     }
   });
 
-  const jsCompile = spawn("pnpm", ["run", "compile:js:core:prod"], {
+  const jsCompile = spawn("pnpm", ["run", "compile:js:core"], {
     stdio: "inherit",
   });
 

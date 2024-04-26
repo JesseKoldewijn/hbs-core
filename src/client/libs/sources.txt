@@ -1,7 +1,0 @@
-htmx:
-- current: https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js
-- latest: https://unpkg.com/htmx.org@latest/dist/htmx.min.js
-
-jquery:
-- current: https://unpkg.com/jquery@4.0.0-beta/dist/jquery.min.js
-- latest: https://unpkg.com/jquery@beta/dist/jquery.min.js

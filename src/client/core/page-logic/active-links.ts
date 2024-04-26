@@ -1,10 +1,12 @@
+import $ from "jquery/slim";
+
 const activeLinks = async () => {
   $(() => {
     const setActiveLink = () => {
       const anchors = $("a[data-visibly-active='true']");
 
       if (anchors.length > 0) {
-        anchors.each((index, anchor) => {
+        anchors.each((index: number, anchor: string) => {
           const currentAnchor = $(anchor);
           const currentPath = window.location.pathname;
           const currentHref = currentAnchor.attr("href");

@@ -1,9 +1,9 @@
 import "./viewTransition.js";
 
+import "htmx.org";
+
 const main = async () => {
-  if ($ !== undefined) {
-    const appCore = await import("./application-core.js");
-    appCore.default();
-  }
+  const appCore = await import("./application-core.js");
+  appCore.default();
 };
 main();
