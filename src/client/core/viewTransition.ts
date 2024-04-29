@@ -1,10 +1,15 @@
-interface Document {
+import $ from "jquery/slim";
+
+interface CustomDocument extends Document {
   startViewTransition?: (callback: () => void) => void;
 }
 
 function spaNavigate(href: string, e: Event) {
+  const d = document as CustomDocument;
+
   // Fallback for browsers that don't support this API:
-  if (!document.startViewTransition) {
+  if (!d.startViewTransition) {
+    window.location.assign(href);
     return;
   }
 
@@ -13,7 +18,7 @@ function spaNavigate(href: string, e: Event) {
   }
 
   // With a transition:
-  document.startViewTransition(async () => {
+  d.startViewTransition(async () => {
     // check if e has the key of "htmx-internal-data"
     const IsHxBoost = !!(e as CustomEvent)["htmx-internal-data"];
 
