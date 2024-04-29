@@ -1,4 +1,5 @@
 import $ from "jquery/slim";
+import { isSafari, isSamsungBrowser, isIe } from "@braintree/browser-detection";
 
 interface CustomDocument extends Document {
   startViewTransition?: (callback: () => void) => void;
@@ -21,6 +22,15 @@ function spaNavigate(href: string, e: Event) {
   d.startViewTransition(async () => {
     // check if e has the key of "htmx-internal-data"
     const IsHxBoost = !!(e as CustomEvent)["htmx-internal-data"];
+
+    const ueIsSafari = isSafari(navigator.userAgent);
+    const ueIsSamsungBrowser = isSamsungBrowser(navigator.userAgent);
+    const ueIsIe = isIe(navigator.userAgent);
+
+    if (ueIsSafari || ueIsSamsungBrowser || ueIsIe) {
+      window.location.assign(href);
+      return;
+    }
 
     if (IsHxBoost) {
       e.preventDefault();

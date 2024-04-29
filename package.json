@@ -13,6 +13,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@braintree/browser-detection": "^2.0.0",
     "@fastify/helmet": "^11.1.1",
     "@fastify/static": "^7.0.3",
     "@fastify/view": "^9.0.0",
