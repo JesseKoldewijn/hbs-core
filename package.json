@@ -23,6 +23,7 @@
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "handlebars": "^4.7.8",
+    "highlight.js": "^11.9.0",
     "htmx.org": "^1.9.12",
     "jquery": "4.0.0-beta",
     "watch": "^1.0.2",

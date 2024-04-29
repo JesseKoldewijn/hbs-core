@@ -35,6 +35,9 @@ dependencies:
   handlebars:
     specifier: ^4.7.8
     version: 4.7.8
+  highlight.js:
+    specifier: ^11.9.0
+    version: 11.9.0
   htmx.org:
     specifier: ^1.9.12
     version: 1.9.12
@@ -2734,6 +2737,11 @@ packages:
   /helmet@7.1.0:
     resolution: {integrity: sha512-g+HZqgfbpXdCkme/Cd/mZkV0aV3BZZZSugecH03kl38m/Kmdx8jKjBikpDj2cr+Iynv4KpYEviojNdTJActJAg==}
     engines: {node: '>=16.0.0'}
+    dev: false
+
+  /highlight.js@11.9.0:
+    resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
+    engines: {node: '>=12.0.0'}
     dev: false
 
   /html-minifier-terser@7.2.0:

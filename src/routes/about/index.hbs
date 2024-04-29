@@ -3,10 +3,10 @@
 >
   <div class="flex flex-col text-center">
     <h1 class="text-lg font-bold">About</h1>
-    <p class="max-w-sm">This is the About page. And viewing this page will cost
-      you about
-      {{bc_money 69}}
-      per minute</p>
+    <p class="max-w-sm">This is the About page. Hosting this project only costs
+      {{bc_money 0}}
+      per month.
+    </p>
   </div>
 
   <a href="/" class="button" hx-boost="true">
@@ -14,6 +14,26 @@
       Home
     </span>
   </a>
+
+  <div class="flex flex-col gap-4">
+    <h2 class="text-center text-lg font-bold">Code Highlighting</h2>
+    <div class="flex flex-col gap-2">
+      {{#highlight-hbs}}
+        <div class="flex flex-col text-center">
+          <h1 class="text-lg font-bold">Currencies</h1>
+          <p class="max-w-sm">Currencies can be placed like this:
+            [str-replace="bc_money:0"]
+          </p>
+        </div>
+      {{/highlight-hbs}}
+      <div class="flex">
+        {{#highlight-ts}}
+          require $ from "jquery"; $().ready(() => { console.log("Hello,
+          world!");});
+        {{/highlight-ts}}
+      </div>
+    </div>
+  </div>
 
   <div class="flex flex-col gap-4">
     <h2 class="text-center text-lg font-bold">Items (rendered from server
