@@ -14,16 +14,19 @@
 }
 
 @theme {
-  --color-background: hsla(0, 0%, 0%, 0.97);
-  --color-background-faded: hsla(0, 0%, 0%, 0.25);
-  --color-foreground: hsla(0, 0%, 100%, 0.97);
-  --color-foreground-faded: hsla(0, 0%, 100%, 0.25);
+  --color-primary-background: #020202;
+  --color-secondary-background: #0d2818;
+  --color-contrast-background: #04471c;
+  --color-primary-foreground: #058c42;
+  --color-text-foreground: #ffffff;
+  --color-contrast-foreground: #16db65;
+
   --font-family-sans: "Geist", "Inter", "Roboto", sans-serif;
 }
 
 :root {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--color-primary-background);
+  color: var(--color-text-foreground);
 
   font-family: var(--font-family-sans);
 
@@ -34,16 +37,16 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: var(--color-foreground-faded);
+    background: var(--color-secondary-background);
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: var(--color-foreground);
+    background: var(--color-primary-foreground);
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-foreground-faded);
+    background: var(--color-contrast-foreground);
   }
 }

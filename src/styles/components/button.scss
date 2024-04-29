@@ -1,11 +1,12 @@
 .button {
   --button-size: 50px;
-  --button-foreground: var(--color-background);
-  --button-background: var(--color-foreground);
+  --button-foreground: var(--color-contrast-background);
+  --button-background: var(--color-contrast-foreground);
   --button-border-width: 2px;
-  --button-border: var(--button-border-width) solid var(--color-background);
+  --button-border: var(--button-border-width) solid
+    var(--color-primary-foreground);
   --button-border-hover: var(--button-border-width) solid
-    var(--color-foreground);
+    var(--color-primary-foreground);
   --button-border-radius: 5px;
 
   border: var(--button-border);
@@ -46,11 +47,14 @@
   &--invert {
     --button-border: none;
     --button-border-hover: none;
-    --button-foreground: var(--color-foreground);
-    --button-background: var(--color-background);
+    --button-foreground: var(--color-contrast-foreground);
+    --button-background: var(--color-contrast-background);
   }
 
   &--active {
-    filter: invert(1);
+    --button-border: none;
+    --button-border-hover: none;
+    --button-foreground: var(--color-contrast-background);
+    --button-background: var(--color-contrast-foreground);
   }
 }
