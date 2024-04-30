@@ -1,18 +1,27 @@
 import Handlebars from "handlebars";
 
+import "highlight.js/styles/obsidian.min.css";
+
+import formatHtml from "html-format";
+
 // Using ES6 import syntax
 import hljs from "highlight.js/lib/core";
 import hbs from "highlight.js/lib/languages/handlebars";
 
 // Then register the languages you need
-hljs.registerLanguage("hbs", hbs);
+hljs.registerLanguage("handlebars", hbs);
 
 Handlebars.registerHelper(
   "highlight-hbs",
   function (options: Handlebars.HelperOptions) {
     let result = "";
     const children = options.fn({});
-    result += children;
+
+    // remove leading and trailing white spaces
+    const codeLines = children.split("\n");
+    const trimmedCode = codeLines.map((line) => line.trim()).join("\n");
+
+    result += formatHtml(trimmedCode);
 
     // example of string replace call = "[str-replace="bc_money:0"]"
     const replaceCalls = result.match(/\[str-replace=".*"\]/g);
@@ -35,8 +44,10 @@ Handlebars.registerHelper(
       });
     }
 
-    const highlighted = hljs.highlight("hbs", result).value;
+    const highlighted = hljs.highlight(result, {
+      language: "handlebars",
+    }).value;
 
-    return `<pre><code class="hljs language-hbs">${highlighted}</code></pre>`;
+    return `<pre><code class="hljs language-handlebars">${highlighted}</code></pre>`;
   },
 );

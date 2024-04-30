@@ -17,7 +17,7 @@
 
   <div class="flex flex-col gap-4">
     <h2 class="text-center text-lg font-bold">Code Highlighting</h2>
-    <div class="flex flex-col gap-2">
+    <div class="flex max-w-[90vw] flex-col gap-2 overflow-x-auto">
       {{#highlight-hbs}}
         <div class="flex flex-col text-center">
           <h1 class="text-lg font-bold">Currencies</h1>
@@ -26,12 +26,6 @@
           </p>
         </div>
       {{/highlight-hbs}}
-      <div class="flex">
-        {{#highlight-ts}}
-          require $ from "jquery"; $().ready(() => { console.log("Hello,
-          world!");});
-        {{/highlight-ts}}
-      </div>
     </div>
   </div>
 

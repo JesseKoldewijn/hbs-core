@@ -24,6 +24,7 @@
     "fastify": "^4.26.2",
     "handlebars": "^4.7.8",
     "highlight.js": "^11.9.0",
+    "html-format": "^1.1.6",
     "htmx.org": "^1.9.12",
     "jquery": "4.0.0-beta",
     "watch": "^1.0.2",
