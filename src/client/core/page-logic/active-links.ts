@@ -24,6 +24,11 @@ const activeLinks = async () => {
     };
     setActiveLink();
 
+    // listen for url change
+    window.addEventListener("popstate", () => {
+      setActiveLink();
+    });
+
     const fhbsCtx = $("script[data-id='fhbs-ctx']");
 
     if (fhbsCtx) {
