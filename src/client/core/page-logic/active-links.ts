@@ -1,54 +1,53 @@
-import $ from "jquery/slim";
-
 const activeLinks = async () => {
-  $(() => {
-    const setActiveLink = () => {
-      const anchors = $("a[data-visibly-active='true']");
+  const setActiveLink = () => {
+    const anchors = document.querySelectorAll("a[data-visibly-active='true']");
 
-      if (anchors.length > 0) {
-        anchors.each((index: number, anchor: string) => {
-          const currentAnchor = $(anchor);
-          const currentPath = window.location.pathname;
-          const currentHref = currentAnchor.attr("href");
+    if (anchors.length > 0) {
+      anchors.forEach((anchor) => {
+        const currentAnchor = anchor;
+        const currentPath = window.location.pathname;
+        const currentHref = currentAnchor.getAttribute("href");
 
-          if (currentHref === currentPath) {
-            const isButton = currentAnchor.hasClass("button");
-            if (isButton) {
-              currentAnchor.addClass("button--active");
-            } else {
-              currentAnchor.addClass("active");
-            }
+        if (currentHref === currentPath) {
+          const isButton = currentAnchor.classList.contains("button");
+          if (isButton) {
+            currentAnchor.classList.add("button--active");
+          } else {
+            currentAnchor.classList.add("active");
           }
-        });
-      }
-    };
-    setActiveLink();
-
-    const fhbsCtx = $("script[data-id='fhbs-ctx']");
-
-    if (fhbsCtx) {
-      let lastRanPathname = window.location.pathname;
-      // listen for change element in the DOM
-      const observer = new MutationObserver(() => {
-        const f = $("script[data-id='fhbs-ctx']");
-        const ctx = { ...f[0].dataset };
-
-        if (lastRanPathname !== ctx.location) {
-          lastRanPathname = window.location.pathname;
-          return;
         }
-
-        lastRanPathname = window.location.pathname;
-
-        setActiveLink();
-      });
-
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: true,
       });
     }
-  });
+  };
+  setActiveLink();
+
+  const fhbsCtx = document.querySelector("script[data-id='fhbs-ctx']");
+
+  if (fhbsCtx) {
+    let lastRanPathname = window.location.pathname;
+    // listen for change element in the DOM
+    const observer = new MutationObserver(() => {
+      const f = document.querySelector<HTMLScriptElement>(
+        "script[data-id='fhbs-ctx']",
+      );
+      const ctx = { ...f?.dataset };
+
+      if (lastRanPathname !== ctx.location) {
+        lastRanPathname = window.location.pathname;
+        return;
+      }
+
+      lastRanPathname = window.location.pathname;
+
+      setActiveLink();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    });
+  }
 };
+
 export default activeLinks;
