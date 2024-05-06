@@ -1047,6 +1047,9 @@ code.hljs {
 @font-face {
   font-family: "Geist";
   display: swap;
+  font-display: swap;
+  font-style: normal;
+  font-weight: 0 999;
   src: url("/fonts/GeistVF.woff2") format("woff2"), url("/fonts/Geist-Regular.ttf") format("truetype");
 }
 :root {

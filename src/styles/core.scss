@@ -9,6 +9,9 @@
 @font-face {
   font-family: "Geist";
   display: swap;
+  font-display: swap;
+  font-style: normal;
+  font-weight: 0 999;
   src:
     url("/fonts/GeistVF.woff2") format("woff2"),
     url("/fonts/Geist-Regular.ttf") format("truetype");
@@ -30,7 +33,6 @@
   color: var(--color-text-foreground);
 
   font-family: var(--font-family-sans);
-  font-display: swap;
 
   /* width */
   ::-webkit-scrollbar {
