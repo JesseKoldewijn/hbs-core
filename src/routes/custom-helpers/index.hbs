@@ -2,10 +2,9 @@
   class="flex min-h-screen w-full flex-col items-center justify-center gap-6 py-8 pt-20 px-4 md:py-12 md:pt-12"
 >
   <div class="flex flex-col text-center">
-    <h1 class="text-lg font-bold">About</h1>
-    <p class="max-w-sm">This is the About page. Hosting this project only costs
-      {{bc_money 0}}
-      per month.
+    <h1 class="text-lg font-bold">Custom Helpers</h1>
+    <p class="max-w-sm">
+      On this page I'll show you some custom helpers that I've used.
     </p>
   </div>
 
@@ -30,7 +29,15 @@
   </div>
 
   <div class="flex flex-col gap-4">
-    <h2 class="text-center text-lg font-bold">Items (rendered from server
+    <h2 class="text-center text-lg font-bold">DateTime Display</h2>
+    <p>
+      The date & time this page was last build was:
+      {{moment "now" "YYYY-MM-DD HH:mm:ss"}}
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <h2 class="text-center text-lg font-bold">Items loop (rendered from server
       context)</h2>
     {{#if items}}
       <ul
