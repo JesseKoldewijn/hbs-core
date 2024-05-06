@@ -30,10 +30,22 @@
 
   <div class="flex flex-col gap-4">
     <h2 class="text-center text-lg font-bold">DateTime Display</h2>
-    <p>
+    <p class="max-w-md text-balance text-center">
       The date & time this page was last build was:
       {{moment "now" "YYYY-MM-DD HH:mm:ss"}}
     </p>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <h2 class="text-center text-lg font-bold">NewLine to Breakpoint</h2>
+    <div class="flex flex-col gap-1">
+      <span class="text-balance text-center">
+        The date & time this page was last build was:
+      </span>
+      <span class="w-screen max-w-sm text-balance text-center">
+        {{{nl2br someEscapedString "span"}}}
+      </span>
+    </div>
   </div>
 
   <div class="flex flex-col gap-4">

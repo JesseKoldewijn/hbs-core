@@ -672,6 +672,10 @@
   width: 100%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .max-w-\[90vw\] {
   max-width: 90vw;
 }
@@ -714,6 +718,10 @@
 
 .gap-0\.5 {
   gap: var(--spacing-0_5, 0.125rem);
+}
+
+.gap-1 {
+  gap: var(--spacing-1, 0.25rem);
 }
 
 .gap-2 {
