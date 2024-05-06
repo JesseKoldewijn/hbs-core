@@ -1,22 +1,22 @@
+import $ from "jquery/slim";
+
 const activeLinks = async () => {
-  document.addEventListener("DOMContentLoaded", () => {
+  $(() => {
     const setActiveLink = () => {
-      const anchors = document.querySelectorAll(
-        "a[data-visibly-active='true']",
-      );
+      const anchors = $("a[data-visibly-active='true']");
 
       if (anchors.length > 0) {
-        anchors.forEach((anchor) => {
-          const currentAnchor = anchor;
+        anchors.each((index: number, anchor: string) => {
+          const currentAnchor = $(anchor);
           const currentPath = window.location.pathname;
-          const currentHref = currentAnchor.getAttribute("href");
+          const currentHref = currentAnchor.attr("href");
 
           if (currentHref === currentPath) {
-            const isButton = currentAnchor.classList.contains("button");
+            const isButton = currentAnchor.hasClass("button");
             if (isButton) {
-              currentAnchor.classList.add("button--active");
+              currentAnchor.addClass("button--active");
             } else {
-              currentAnchor.classList.add("active");
+              currentAnchor.addClass("active");
             }
           }
         });
@@ -24,27 +24,23 @@ const activeLinks = async () => {
     };
     setActiveLink();
 
-    const fhbsCtx = document.querySelector("script[data-id='fhbs-ctx']");
+    const fhbsCtx = $("script[data-id='fhbs-ctx']");
 
     if (fhbsCtx) {
       let lastRanPathname = window.location.pathname;
       // listen for change element in the DOM
       const observer = new MutationObserver(() => {
-        const f = document.querySelector<HTMLScriptElement>(
-          "script[data-id='fhbs-ctx']",
-        );
-        if (f) {
-          const ctx = { ...f.dataset };
+        const f = $("script[data-id='fhbs-ctx']");
+        const ctx = { ...f[0].dataset };
 
-          if (lastRanPathname !== ctx.location) {
-            lastRanPathname = window.location.pathname;
-            return;
-          }
-
+        if (lastRanPathname !== ctx.location) {
           lastRanPathname = window.location.pathname;
-
-          setActiveLink();
+          return;
         }
+
+        lastRanPathname = window.location.pathname;
+
+        setActiveLink();
       });
 
       observer.observe(document.body, {
@@ -55,5 +51,4 @@ const activeLinks = async () => {
     }
   });
 };
-
 export default activeLinks;
