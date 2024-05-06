@@ -1,4 +1,3 @@
-import $ from "jquery/slim";
 import { isSafari, isSamsungBrowser, isIe } from "@braintree/browser-detection";
 
 interface CustomDocument extends Document {

@@ -48,6 +48,6 @@ Handlebars.registerHelper(
       language: "handlebars",
     }).value;
 
-    return `<pre><code class="hljs language-handlebars">${highlighted}</code></pre>`;
+    return `<pre class="code-block"><code class="hljs language-handlebars">${highlighted}</code></pre>`;
   },
 );

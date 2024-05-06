@@ -11,7 +11,6 @@
   display: swap;
   src:
     url("/fonts/GeistVF.woff2") format("woff2"),
-    url("/fonts/GeistVF.woff") format("woff"),
     url("/fonts/Geist-Regular.ttf") format("truetype");
 }
 
@@ -35,6 +34,7 @@
   /* width */
   ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
   }
 
   /* Track */
