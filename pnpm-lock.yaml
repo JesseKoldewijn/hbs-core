@@ -68,8 +68,8 @@ devDependencies:
     specifier: 4.0.0-alpha.14
     version: 4.0.0-alpha.14(postcss@8.4.38)
   '@types/jquery':
-    specifier: ^3.5.29
-    version: 3.5.29
+    specifier: ^3.5.30
+    version: 3.5.30
   '@types/node':
     specifier: ^20.12.10
     version: 20.12.10
@@ -954,8 +954,8 @@ packages:
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
-  /@types/jquery@3.5.29:
-    resolution: {integrity: sha512-oXQQC9X9MOPRrMhPHHOsXqeQDnWeCDT3PelUIg/Oy8FAbzSZtFHRjc7IpbfFVmpLtJ+UOoywpRsuO5Jxjybyeg==}
+  /@types/jquery@3.5.30:
+    resolution: {integrity: sha512-nbWKkkyb919DOUxjmRVk8vwtDb0/k8FKncmUKFi+NY+QXqWltooxTrswvz4LspQwxvLdvzBN1TImr6cw3aQx2A==}
     dependencies:
       '@types/sizzle': 2.3.8
     dev: true
