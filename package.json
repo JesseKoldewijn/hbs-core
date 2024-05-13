@@ -16,7 +16,7 @@
   "dependencies": {
     "@braintree/browser-detection": "^2.0.0",
     "@fastify/helmet": "^11.1.1",
-    "@fastify/static": "^7.0.3",
+    "@fastify/static": "^7.0.4",
     "@fastify/view": "^9.1.0",
     "@fastify/vite": "^6.0.6",
     "@minify-html/node": "^0.15.0",
