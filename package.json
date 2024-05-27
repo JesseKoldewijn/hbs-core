@@ -43,7 +43,7 @@
     "concurrently": "^8.2.2",
     "copyfiles": "^2.4.1",
     "dotenv-cli": "^7.4.1",
-    "esbuild": "^0.20.2",
+    "esbuild": "^0.21.4",
     "glob": "^10.3.12",
     "minify": "^11.1.1",
     "postcss": "^8.4.38",
