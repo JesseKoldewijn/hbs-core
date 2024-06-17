@@ -23,7 +23,7 @@
     "@t3-oss/env-core": "^0.10.1",
     "chrono-node": "^2.7.5",
     "dotenv": "^16.4.5",
-    "fastify": "^4.26.2",
+    "fastify": "^4.28.0",
     "handlebars": "^4.7.8",
     "highlight.js": "^11.9.0",
     "html-format": "^1.1.6",
