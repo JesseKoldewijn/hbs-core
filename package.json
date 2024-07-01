@@ -37,7 +37,7 @@
     "@csstools/postcss-sass": "^5.1.1",
     "@tailwindcss/postcss": "4.0.0-alpha.14",
     "@types/jquery": "^3.5.29",
-    "@types/node": "^20.12.10",
+    "@types/node": "^20.14.9",
     "@types/watch": "^1.0.6",
     "@zerollup/ts-transform-paths": "^1.7.18",
     "concurrently": "^8.2.2",
