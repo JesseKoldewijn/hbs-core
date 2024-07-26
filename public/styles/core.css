@@ -1,4 +1,4 @@
-/*! tailwindcss v4.0.0-alpha.14 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.0.0-alpha.18 | MIT License | https://tailwindcss.com */
 @layer theme, base, components, utilities;
 @layer theme {
   :root {
@@ -18,11 +18,11 @@
     --default-mono-font-variation-settings: var(
       --font-family-mono--font-variation-settings
     );
-    --breakpoint-sm: 640px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
-    --breakpoint-2xl: 1536px;
+    --breakpoint-sm: 40rem;
+    --breakpoint-md: 48rem;
+    --breakpoint-lg: 64rem;
+    --breakpoint-xl: 80rem;
+    --breakpoint-2xl: 96rem;
     --color-black: #000;
     --color-white: #fff;
     --color-slate-50: #f8fafc;
@@ -285,6 +285,7 @@
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
     --radius-3xl: 1.5rem;
+    --radius-4xl: 2rem;
     --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     --shadow-xs: 0 1px rgb(0 0 0 / 0.05);
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -305,6 +306,7 @@
     --drop-shadow-lg: 0 10px 8px rgb(0 0 0 / 0.04), 0 4px 3px rgb(0 0 0 / 0.1);
     --drop-shadow-xl: 0 20px 13px rgb(0 0 0 / 0.03), 0 8px 5px rgb(0 0 0 / 0.08);
     --drop-shadow-2xl: 0 25px 25px rgb(0 0 0 / 0.15);
+    --drop-shadow-none: 0 0 #0000;
     --spacing-px: 1px;
     --spacing-0: 0px;
     --spacing-0_5: 0.125rem;
@@ -696,6 +698,10 @@
   transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
 }
 
+.resize {
+  resize: both;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -862,7 +868,7 @@
 }
 
 .blur {
-  --tw-blur: blur(8px);
+  --tw-blur: blur(var(--blur, 8px));
   filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
 }
 
@@ -885,44 +891,40 @@
   transition-timing-function: var(--transition-timing-function-in, cubic-bezier(0.4, 0, 1, 1));
 }
 
-.\[a-zA-Z\:\\-\\\.\] {
-  a-zA-Z: \-\.;
-}
-
-@media (width >= 768px) {
+@media (width >= 48rem) {
   .md\:max-w-md {
     max-width: var(--width-md, 28rem);
   }
 }
 
-@media (width >= 768px) {
-  .md\:py-12 {
-    padding-top: var(--spacing-12, 3rem);
-    padding-bottom: var(--spacing-12, 3rem);
-  }
-}
-
-@media (width >= 768px) {
+@media (width >= 48rem) {
   .md\:py-8 {
     padding-top: var(--spacing-8, 2rem);
     padding-bottom: var(--spacing-8, 2rem);
   }
 }
 
-@media (width >= 768px) {
+@media (width >= 48rem) {
+  .md\:py-12 {
+    padding-top: var(--spacing-12, 3rem);
+    padding-bottom: var(--spacing-12, 3rem);
+  }
+}
+
+@media (width >= 48rem) {
   .md\:pt-12 {
     padding-top: var(--spacing-12, 3rem);
   }
 }
 
-@media (width >= 768px) {
+@media (width >= 48rem) {
   .md\:px-6 {
     padding-left: var(--spacing-6, 1.5rem);
     padding-right: var(--spacing-6, 1.5rem);
   }
 }
 
-@media (width >= 768px) {
+@media (width >= 48rem) {
   .md\:pb-8 {
     padding-bottom: var(--spacing-8, 2rem);
   }
@@ -1071,6 +1073,37 @@ code.hljs {
   background: var(--color-contrast-foreground);
 }
 
+@supports (-moz-orient: inline) {
+  @layer base {
+    *, ::before, ::after, ::backdrop {
+      --tw-rotate-x: rotateX(0);
+      --tw-rotate-y: rotateY(0);
+      --tw-rotate-z: rotateZ(0);
+      --tw-skew-x: skewX(0);
+      --tw-skew-y: skewY(0);
+      --tw-border-style: solid;
+      --tw-outline-style: solid;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+    }
+  }
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);
